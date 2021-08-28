@@ -1,0 +1,66 @@
+* {
+    box-sizing: border-box;
+}
+#gameBoard {
+    height: 70vh;
+    width: 80vh;
+    margin: 150px auto 0px;
+
+}
+body {
+    background-color: navy;
+}
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    background-color: rgb(2, 2, 70);
+}
+.headerTitle {
+    text-align: center;
+    color: gainsboro;
+}
+
+#start {
+    margin: auto;
+
+}
+#controls {
+    margin: 30px auto 0px;
+    width: fit-content;
+    height: fit-content;
+}
+button {
+    width: 75px;
+    height: 30px;
+}
+#start {
+    background-color: green;
+    margin-right: 25px;
+}
+#reset {
+    background-color: red;
+    margin-left: 25px;
+}
+
+/* adds styling to the td elements along with a td-set
+class and a td-offset class to give it a checkerboard pattern */
+td {
+    width: 20px;
+    height: 20px;
+}
+.td-set {
+    background-color: royalblue;
+}
+.td-offset {
+    background-color: rgb(18, 36, 88);
+}
+.snake {
+    background-color: green;
+    border: solid black 1px;
+}
+.apple {
+    background-color: yellow;
+    border: solid black 1px;
+}
