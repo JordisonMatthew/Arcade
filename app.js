@@ -1,5 +1,6 @@
 
 // Creates our table data
+
 const table = document.getElementById('gameBoard');
 for (let i = 0; i < 19; i++) {
     const row = document.createElement('tr');
@@ -43,6 +44,7 @@ let gameState = {
     speed: 150,
     inPlay: false,
     tick: null,
+    score: 0,
     rightWall: generateRightWall(),
     leftWall: generateLeftWall(),
     topWall: generateTopWall(),
@@ -50,26 +52,18 @@ let gameState = {
 }
 // Snake Functions
 function startingPosition() {
-    snake.body.push(180);
-    tableElements[180].classList.toggle('snake');
+    const startingIndex = Math.floor(tableElements.length / 2);
+    snake.body.push(startingIndex);
+    tableElements[startingIndex].classList.toggle('snake');
 
-    snake.body.push(181);
-    tableElements[181].classList.toggle('snake');
+    snake.body.push(startingIndex + 1);
+    tableElements[startingIndex + 1].classList.toggle('snake');
 
-    snake.body.push(182);
-    tableElements[182].classList.toggle('snake');
+    snake.body.push(startingIndex + 2);
+    tableElements[startingIndex + 2].classList.toggle('snake');
 
-    snake.body.push(183);
-    tableElements[183].classList.toggle('snake');
-
-    snake.body.push(184);
-    tableElements[184].classList.toggle('snake');
-
-    snake.body.push(185);
-    tableElements[185].classList.toggle('snake');
-
-    snake.body.push(186);
-    tableElements[186].classList.toggle('snake');
+    snake.body.push(startingIndex + 3);
+    tableElements[startingIndex + 3].classList.toggle('snake');
 }
 function drawPosition() {
     let lastSnakeIndex = snake.body.length - 1;
@@ -207,6 +201,28 @@ function removeApple() {
     gameState.apple = null;
 
 }
+// Stat functions ---------------------
+function updateScore() {
+    gameState.score++;
+    document.getElementById('score').innerText = gameState.score;
+}
+function resetScore() {
+    gameState.score = 0;
+    document.getElementById('score').innerText = 0;
+}
+function updateSnakeLength() {
+    document.getElementById('length').innerText = snake.body.length;
+}
+function resetSnakeLength() {
+    document.getElementById('length').innerText = 0;
+}
+function generateGameOver() {
+    document.getElementById('gameOver').innerText = 'GAME OVER!!!'
+}
+function removeGameOver() {
+    document.getElementById('gameOver').innerText = "";
+}
+// -------------------------------------
 // gamestate
     //checks current status of the game calls update and draw
     // ends the gamestate when the user has lost
@@ -254,12 +270,18 @@ function startGame() {
     gameState.inPlay = true;
     startingPosition();
     generateApple();
+    updateSnakeLength();
+
     gameState.tick = setInterval(gameStatus, gameState.speed);
 }
 function resetGame() {
+    clearInterval(gameState.tick);
     removeSnake();
     removeApple();
     snake.nextDirection = -1;
+    resetScore();
+    resetSnakeLength();
+    removeGameOver();
 }
 
 function gameStatus() {
@@ -270,14 +292,16 @@ function gameStatus() {
 
     if (!gameState.inPlay) {
         clearInterval(gameState.tick);
-        alert('you lost');
+        generateGameOver();
         return;
     }
     
     if (onApple()) {
         removeApple();
+        updateScore();
         growSnake();
         generateApple();
+        updateSnakeLength();
         
     }
     else {
