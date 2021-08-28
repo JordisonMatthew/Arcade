@@ -343,6 +343,7 @@ function resetGame() {
     removeSnake(); // removes snake from html and resets value
     removeApple(); // remove apple from html and reset value
     snake.nextDirection = -1; // assigns default nextDirection again
+    gameState.speed = 150; // resets the speed of snake
     resetScore(); // score reverted to zero
     resetSnakeLength(); // length to zero
     removeGameOver(); // game over screen removed
@@ -354,6 +355,11 @@ function resetGame() {
 // Runs all the functions that need to be executed everytime
 // the snake moves
 function gameStatus() {
+    // resets our interval so the speed increase can
+    // be applied to the snake
+    clearInterval(gameState.tick);
+    gameState.tick = setInterval(gameStatus, gameState.speed);
+
     getSnakeHeadLocation(); // sets current head location
 
     snakeCollision(); // checks if snake will collide
@@ -370,9 +376,13 @@ function gameStatus() {
     if (onApple()) {
         removeApple(); // remove current apple
         updateScore(); // update users score
-        growSnake(); // grow the snake
+        growSnake(); // grows the snake
         generateApple(); // generate a new apple
         updateSnakeLength(); // update the current length
+
+        if (gameState.speed > 100) {
+            gameState.speed -= 5;
+        }
         
     }
     else { // basic snake movement
