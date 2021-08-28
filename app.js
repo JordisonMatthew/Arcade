@@ -41,7 +41,7 @@ let gameState = {
     snake: snake,
     board: tableElements,
     speed: 150,
-    inPlay: true,
+    inPlay: false,
     tick: null,
     rightWall: generateRightWall(),
     leftWall: generateLeftWall(),
@@ -251,6 +251,7 @@ startButton.addEventListener('click', startGame);
 resetButton.addEventListener('click', resetGame);
 
 function startGame() {
+    gameState.inPlay = true;
     startingPosition();
     generateApple();
     gameState.tick = setInterval(gameStatus, gameState.speed);
@@ -258,6 +259,7 @@ function startGame() {
 function resetGame() {
     removeSnake();
     removeApple();
+    snake.nextDirection = -1;
 }
 
 function gameStatus() {
