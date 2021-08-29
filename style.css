@@ -30,6 +30,8 @@ header {
     margin: 30px auto 0px;
     width: fit-content;
     height: fit-content;
+    display: flex;
+    justify-content: center;
 }
 button {
     width: 75px;
