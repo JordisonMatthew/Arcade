@@ -28,11 +28,9 @@ header {
 }
 #controls {
     margin: 30px auto 0px;
-    width: fit-content;
+    width: 200px;
     height: fit-content;
     display: flex;
-    justify-content: center;
-    align-items: center;
 }
 button {
     width: 75px;
