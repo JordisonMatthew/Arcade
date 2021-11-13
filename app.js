@@ -174,22 +174,22 @@ document.onkeydown = checkKey;
 function checkKey(e) {
     e = e || window.event;
 
-    if (e.keyCode == '38') {
+    if (e.keyCode == '38' || e.keyCode == '87') {
         // up arrow
         if (snake.nextDirection === 19) return;
         snake.nextDirection = -19;
     }
-    else if (e.keyCode == '40') {
+    else if (e.keyCode == '40' || e.keyCode == '83') {
         // down arrow
         if (snake.nextDirection === -19) return;
         snake.nextDirection = 19;
     }
-    else if (e.keyCode == '37') {
+    else if (e.keyCode == '37' || e.keyCode == '65') {
        // left arrow
        if (snake.nextDirection === 1) return;
        snake.nextDirection = -1;
     }
-    else if (e.keyCode == '39') {
+    else if (e.keyCode == '39' || e.keyCode == '68') {
        // right arrow
        if (snake.nextDirection === -1) return;
        snake.nextDirection = 1;
